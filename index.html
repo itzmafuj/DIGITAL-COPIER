@@ -13,19 +13,31 @@
 :root{
   --navy:#0b2036;
   --blue:#1f6fd6;
+  --blue-light:#5b9bef;
   --blue-dark:#154f9e;
   --sky:#35b6e6;
   --orange:#f2811d;
+  --orange-light:#ffab5c;
   --orange-dark:#d66c0d;
-  --bg:#f5f8fc;
-  --card:#ffffff;
+  --bg:#f3effc;
+  --bg-soft:#ece4fa;
+  --surface:#f6f2fc;
+  --card:#f6f2fc;
   --ink:#16212e;
   --muted:#5b6b7c;
-  --line:#e1e8f0;
+  --line:#e2d9f5;
   --green:#1e8e3e;
+  --green-light:#4fc775;
+  --green-dark:#146429;
   --purple:#7c4dbd;
+  --purple-light:#a37fe0;
+  --purple-dark:#5a3390;
   --red:#e53935;
+  --red-light:#ff746f;
+  --red-dark:#b71c1c;
   --amber:#f39c12;
+  --amber-light:#ffc157;
+  --amber-dark:#c97b00;
   --radius:10px;
   --maxw:1120px;
 }
@@ -91,8 +103,9 @@ a{color:inherit;}
 /* Header */
 header.site{
   position:sticky;top:0;z-index:40;
-  background:var(--navy);
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  background:linear-gradient(100deg,var(--blue-dark) 0%, var(--blue) 45%, var(--purple) 100%);
+  border-bottom:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 6px 20px rgba(11,32,54,0.18);
 }
 .nav{
   display:flex;align-items:center;justify-content:space-between;
@@ -100,20 +113,25 @@ header.site{
   gap:16px;
 }
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0;}
-.brand img{height:48px;width:48px;border-radius:50%;flex-shrink:0;}
+.brand img{height:48px;width:48px;border-radius:50%;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,0.35), 0 0 0 3px rgba(255,255,255,0.18);}
 .brand .name{font-family:'Barlow',sans-serif;font-weight:800;font-size:1.15rem;line-height:1.1;color:#fff;white-space:nowrap;}
-.brand .tag{font-size:0.68rem;color:#a9c2de;letter-spacing:.02em;white-space:nowrap;}
+.brand .tag{font-size:0.68rem;color:#e6d9fb;letter-spacing:.02em;white-space:nowrap;}
 .navlinks{display:flex;align-items:center;gap:22px;}
-.navlinks a{color:#cfe0f2;text-decoration:none;font-size:0.92rem;font-weight:500;}
+.navlinks a{color:#f0e7fc;text-decoration:none;font-size:0.92rem;font-weight:500;}
 .navlinks a:hover{color:#fff;}
+.navlinks a.admin-nav-link{
+  color:#fff;font-weight:700;padding:6px 14px;border:1.5px solid rgba(255,255,255,0.55);border-radius:999px;
+  background:rgba(255,255,255,0.12);cursor:pointer;font-family:inherit;font-size:0.88rem;
+}
+.navlinks a.admin-nav-link:hover{background:var(--orange);border-color:var(--orange);}
 .nav-actions{display:flex;align-items:center;gap:10px;}
 .navtoggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;padding:4px 8px;}
 
 @media (max-width:880px){
   .navlinks{
-    position:absolute;top:100%;left:0;right:0;background:var(--navy);
+    position:absolute;top:100%;left:0;right:0;background:linear-gradient(100deg,var(--blue-dark),var(--purple));
     flex-direction:column;align-items:flex-start;padding:14px 20px 20px;gap:14px;
-    display:none;border-bottom:1px solid rgba(255,255,255,0.1);
+    display:none;border-bottom:1px solid rgba(255,255,255,0.15);box-shadow:0 12px 24px rgba(11,32,54,0.25);
   }
   .navlinks.open{display:flex;}
   .navtoggle{display:block;}
@@ -122,12 +140,31 @@ header.site{
 
 /* Hero */
 .hero{
-  background:linear-gradient(135deg,var(--navy) 0%, #123258 55%, var(--blue-dark) 100%);
-  color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#e9defa 0%, var(--bg-soft) 55%, #e3d8f7 100%);
+  color:#16212e;position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  --hero-ink:#16212e;
+  --hero-muted:#4d5c6d;
+}
+.hero::before{
+  content:"COPIER";position:absolute;left:-10px;top:50%;transform:translateY(-50%);
+  font-family:'Barlow',sans-serif;font-weight:800;font-size:min(22vw,260px);
+  color:var(--hero-ink);opacity:0.06;letter-spacing:-0.02em;white-space:nowrap;
+  pointer-events:none;line-height:1;
 }
 .hero::after{
   content:"";position:absolute;right:-120px;top:-80px;width:420px;height:420px;
-  background:radial-gradient(circle,rgba(53,182,230,0.28),transparent 70%);
+  background:radial-gradient(circle,rgba(31,111,214,0.16),transparent 70%);
+  pointer-events:none;
+}
+.hero .blob-purple{
+  position:absolute;left:-80px;bottom:-100px;width:340px;height:340px;
+  background:radial-gradient(circle,rgba(124,77,189,0.16),transparent 70%);
+  pointer-events:none;
+}
+.hero .blob-orange{
+  position:absolute;right:20%;bottom:-140px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(242,129,29,0.14),transparent 70%);
   pointer-events:none;
 }
 .hero .wrap{
@@ -139,21 +176,31 @@ header.site{
 }
 .district-chip{
   font-size:0.75rem;padding:5px 12px;border-radius:999px;
-  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);
-  color:#dbe9f7;
+  background:var(--surface);border:1px solid var(--line);
+  color:var(--blue-dark);font-weight:600;box-shadow:0 2px 6px rgba(11,32,54,0.05);
 }
-.hero h1{font-size:clamp(2rem,4vw,3.1rem);color:#fff;max-width:14ch;}
-.hero p.lede{color:#c6d7ea;font-size:1.08rem;max-width:52ch;margin-bottom:26px;}
-.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.district-chip.c-blue{background:#eaf2fd;border-color:#cfe1f8;color:var(--blue-dark);}
+.district-chip.c-green{background:#e9f8ee;border-color:#c9edd4;color:var(--green);}
+.district-chip.c-purple{background:#f2ecfb;border-color:#ddccf3;color:var(--purple);}
+.district-chip.c-orange{background:#fdefe1;border-color:#f8d9b6;color:var(--orange-dark);}
+.hero h1{font-size:clamp(2rem,4vw,3.1rem);color:var(--hero-ink);max-width:14ch;position:relative;}
+.hero p.lede{color:var(--hero-muted);font-size:1.08rem;max-width:52ch;margin-bottom:26px;position:relative;}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;position:relative;}
+.btn-outline-dark{
+  background:var(--surface);color:var(--hero-ink, var(--ink));border:1.5px solid var(--line);
+  box-shadow:0 2px 8px rgba(11,32,54,0.06);
+}
+.btn-outline-dark:hover{border-color:var(--blue);color:var(--blue-dark);}
 .hero .hero-art{
-  background:#fff;border-radius:18px;padding:18px;
-  box-shadow:0 30px 60px rgba(0,0,0,0.35);
-  justify-self:center;
+  background:var(--surface);border-radius:18px;padding:18px;
+  box-shadow:0 30px 60px rgba(11,32,54,0.16);
+  justify-self:center;position:relative;
 }
 .hero .hero-art img{border-radius:12px;}
 @media (max-width:880px){
   .hero .wrap{grid-template-columns:1fr;padding-top:36px;}
   .hero .hero-art{max-width:280px;}
+  .hero::before{font-size:28vw;}
 }
 
 /* Section basics */
@@ -162,9 +209,12 @@ section{padding:64px 0;}
 .section-head .kicker{
   color:var(--blue);font-weight:700;font-size:0.82rem;margin-bottom:8px;display:block;
 }
+.kicker.k-purple{color:var(--purple);}
+.kicker.k-orange{color:var(--orange-dark);}
+.kicker.k-green{color:var(--green);}
 .section-head h2{font-size:clamp(1.6rem,2.6vw,2.15rem);}
 .section-head p{color:var(--muted);}
-.divider{height:3px;width:64px;background:linear-gradient(90deg,var(--blue),var(--sky));border-radius:3px;margin:14px 0 0;}
+.divider{height:3px;width:64px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--orange));border-radius:3px;margin:14px 0 0;}
 
 /* Services / categories */
 .cat-grid{
@@ -173,16 +223,39 @@ section{padding:64px 0;}
 @media (max-width:920px){.cat-grid{grid-template-columns:repeat(3,1fr);}}
 @media (max-width:560px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
 .cat-card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:22px 14px;text-align:center;cursor:pointer;transition:border-color .15s, transform .15s;
+  background:var(--card);border:1px solid var(--line);border-top:4px solid var(--line);border-radius:var(--radius);
+  padding:22px 14px;text-align:center;cursor:pointer;transition:border-color .15s, transform .15s, box-shadow .15s;
 }
-.cat-card:hover{transform:translateY(-3px);border-color:var(--blue);}
-.cat-card.active{border-color:var(--blue);box-shadow:0 0 0 2px rgba(31,111,214,0.25) inset;}
+.cat-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(11,32,54,0.1);}
+.cat-card.active{box-shadow:0 0 0 2px rgba(31,111,214,0.25) inset;}
 .cat-icon{
   width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   margin:0 auto 12px;
 }
-.cat-icon svg{width:26px;height:26px;}
+.cat-icon svg{width:26px;height:26px;position:relative;z-index:2;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.35));}
+.icon-3d{
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow:
+    inset 0 3px 4px rgba(255,255,255,0.55),
+    inset 0 -8px 12px rgba(0,0,0,0.35),
+    0 10px 16px rgba(11,32,54,0.35),
+    0 2px 0 rgba(0,0,0,0.15);
+  position:relative;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.cat-card:hover .icon-3d{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:
+    inset 0 3px 4px rgba(255,255,255,0.6),
+    inset 0 -8px 12px rgba(0,0,0,0.3),
+    0 14px 22px rgba(11,32,54,0.4),
+    0 2px 0 rgba(0,0,0,0.15);
+}
+.icon-glare{
+  position:absolute;top:8%;left:14%;width:46%;height:32%;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0));
+  filter:blur(1px);pointer-events:none;z-index:1;
+}
 .cat-card .cat-name{font-size:0.86rem;font-weight:600;color:var(--ink);}
 
 /* Products */
@@ -200,10 +273,10 @@ section{padding:64px 0;}
   background:var(--bg);position:relative;
 }
 .prod-media img{width:100%;height:100%;object-fit:cover;}
-.prod-media .placeholder-icon{width:64px;height:64px;opacity:0.9;}
+.prod-media .placeholder-icon{}
 .cat-strip{position:absolute;left:0;top:0;bottom:0;width:5px;}
 .prod-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;}
-.prod-cat{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.prod-cat{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;display:inline-block;padding:3px 10px;border-radius:999px;width:fit-content;}
 .prod-name{font-family:'Barlow',sans-serif;font-weight:700;font-size:1.05rem;}
 .prod-desc{color:var(--muted);font-size:0.86rem;flex:1;}
 .prod-price{font-family:'Barlow',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue-dark);}
@@ -226,15 +299,15 @@ section{padding:64px 0;}
 .area-card li{margin-bottom:3px;}
 
 /* Trust strip */
-.trust-strip{background:var(--navy);color:#fff;}
+.trust-strip{background:var(--bg-soft);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
 @media (max-width:760px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
-.trust-grid .num{font-family:'Barlow',sans-serif;font-weight:800;font-size:1.9rem;color:var(--sky);}
-.trust-grid .lbl{color:#c6d7ea;font-size:0.85rem;margin-top:4px;}
+.trust-grid .num{font-family:'Barlow',sans-serif;font-weight:800;font-size:1.9rem;color:var(--blue-dark);}
+.trust-grid .lbl{color:var(--muted);font-size:0.85rem;margin-top:4px;}
 
 /* Contact / CTA band */
 .cta-band{
-  background:linear-gradient(120deg,var(--blue),var(--blue-dark));
+  background:linear-gradient(120deg,var(--blue) 0%, var(--purple) 60%, var(--orange) 130%);
   color:#fff;border-radius:18px;padding:40px 34px;display:flex;justify-content:space-between;
   align-items:center;gap:24px;flex-wrap:wrap;
 }
@@ -259,6 +332,12 @@ footer a:hover{color:#fff;}
 }
 .foot-bottom button.admin-link{background:none;border:none;color:#7f94ab;font-size:0.78rem;cursor:pointer;text-decoration:underline;padding:0;font-family:inherit;}
 .foot-bottom button.admin-link:hover{color:#fff;}
+.build-credit{
+  text-align:center;padding:14px 20px 0;margin-top:6px;border-top:1px solid rgba(255,255,255,0.08);
+  font-size:0.76rem;color:#5e7288;
+}
+.build-credit a{color:#9fb7cf;text-decoration:none;font-weight:600;}
+.build-credit a:hover{color:#fff;}
 
 /* Sticky mobile call bar */
 .mobile-call-bar{
@@ -331,6 +410,7 @@ footer a:hover{color:#fff;}
       <a href="#products">Products</a>
       <a href="#coverage">Service Area</a>
       <a href="#contact">Contact</a>
+      <a href="#" class="admin-nav-link" id="openAdminLogin">Admin</a>
     </nav>
     <div class="nav-actions">
       <a class="btn btn-call btn-sm" id="navCallBtn" href="tel:+919000000000">Call Now</a>
@@ -340,19 +420,21 @@ footer a:hover{color:#fff;}
 </header>
 
 <section class="hero" id="top">
+  <div class="blob-purple"></div>
+  <div class="blob-orange"></div>
   <div class="wrap">
     <div>
       <div class="eyebrow-strip">
-        <span class="district-chip">Malda</span>
-        <span class="district-chip">Uttar Dinajpur</span>
-        <span class="district-chip">Dakshin Dinajpur</span>
-        <span class="district-chip">Murshidabad</span>
+        <span class="district-chip c-blue">Malda</span>
+        <span class="district-chip c-green">Uttar Dinajpur</span>
+        <span class="district-chip c-purple">Dakshin Dinajpur</span>
+        <span class="district-chip c-orange">Murshidabad</span>
       </div>
       <h1>Your trusted partner for Xerox &amp; printing solutions</h1>
       <p class="lede">Genuine parts, certified technicians and quick doorstep service for Xerox machines, printers and photocopiers &mdash; sales, repair, AMC and spares across North Bengal.</p>
       <div class="cta-row">
         <a href="tel:+919000000000" class="btn btn-call" id="heroCallBtn">&#128222; Call to Book a Visit</a>
-        <a href="https://wa.me/919000000000" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Us</a>
+        <a href="https://wa.me/919000000000" target="_blank" rel="noopener" class="btn btn-outline-dark">WhatsApp Us</a>
       </div>
     </div>
     <div class="hero-art">
@@ -375,7 +457,7 @@ footer a:hover{color:#fff;}
 <section id="products" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker">Catalogue</span>
+      <span class="kicker k-purple">Catalogue</span>
       <h2>Machines, printers &amp; spares</h2>
       <div class="divider"></div>
     </div>
@@ -390,25 +472,25 @@ footer a:hover{color:#fff;}
 <section id="coverage">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker">Where we work</span>
+      <span class="kicker k-orange">Where we work</span>
       <h2>Full service coverage across four districts</h2>
       <div class="divider"></div>
     </div>
     <div class="area-grid">
-      <div class="area-card">
-        <h3>Malda</h3>
+      <div class="area-card" style="border-top-color:var(--blue);">
+        <h3 style="color:var(--blue-dark);">Malda</h3>
         <ul><li>English Bazar</li><li>Old Malda</li><li>Chanchal</li><li>Harishchandrapur</li><li>Ratua</li></ul>
       </div>
-      <div class="area-card">
-        <h3>Uttar Dinajpur</h3>
+      <div class="area-card" style="border-top-color:var(--green);">
+        <h3 style="color:var(--green);">Uttar Dinajpur</h3>
         <ul><li>Raiganj</li><li>Kaliyaganj</li><li>Islampur</li><li>Chopra</li><li>Karandighi</li></ul>
       </div>
-      <div class="area-card">
-        <h3>Dakshin Dinajpur</h3>
+      <div class="area-card" style="border-top-color:var(--purple);">
+        <h3 style="color:var(--purple);">Dakshin Dinajpur</h3>
         <ul><li>Balurghat</li><li>Gangarampur</li><li>Buniadpur</li><li>Kumarganj</li><li>Tapan</li></ul>
       </div>
-      <div class="area-card">
-        <h3>Murshidabad</h3>
+      <div class="area-card" style="border-top-color:var(--orange);">
+        <h3 style="color:var(--orange-dark);">Murshidabad</h3>
         <ul><li>Berhampore</li><li>Jangipur</li><li>Lalgola</li><li>Kandi</li><li>Domkal</li></ul>
       </div>
     </div>
@@ -418,10 +500,10 @@ footer a:hover{color:#fff;}
 <section class="trust-strip">
   <div class="wrap">
     <div class="trust-grid">
-      <div><div class="num">10+ yrs</div><div class="lbl">In Xerox &amp; printer service</div></div>
-      <div><div class="num">4 districts</div><div class="lbl">Doorstep coverage</div></div>
-      <div><div class="num">1000+</div><div class="lbl">Machines serviced</div></div>
-      <div><div class="num">24-48 hrs</div><div class="lbl">Typical response time</div></div>
+      <div><div class="num" style="color:var(--blue-dark);">10+ yrs</div><div class="lbl">In Xerox &amp; printer service</div></div>
+      <div><div class="num" style="color:var(--green);">4 districts</div><div class="lbl">Doorstep coverage</div></div>
+      <div><div class="num" style="color:var(--purple);">1000+</div><div class="lbl">Machines serviced</div></div>
+      <div><div class="num" style="color:var(--orange-dark);">24-48 hrs</div><div class="lbl">Typical response time</div></div>
     </div>
   </div>
 </section>
@@ -434,7 +516,7 @@ footer a:hover{color:#fff;}
         <p>Call us and we'll book a technician or quote you the same day.</p>
       </div>
       <div class="cta-row" style="margin:0;">
-        <a href="tel:+919000000000" class="btn" style="background:#fff;color:var(--blue-dark);">&#128222; Call +91 90000 00000</a>
+        <a href="tel:+919000000000" class="btn" style="background:var(--surface);color:var(--purple-dark);">&#128222; Call +91 90000 00000</a>
         <a href="https://wa.me/919000000000" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp</a>
       </div>
     </div>
@@ -471,7 +553,10 @@ footer a:hover{color:#fff;}
     </div>
     <div class="foot-bottom">
       <span>&copy; <span id="yearNow"></span> Digital Copier. All rights reserved.</span>
-      <button class="admin-link" id="openAdminLogin">Admin Login</button>
+      <span>Admin access is available from the navigation bar above.</span>
+    </div>
+    <div class="build-credit">
+      Build by <a href="#" onclick="return false;">Sh1nzo / mfzx.build</a>
     </div>
   </div>
 </footer>
@@ -561,15 +646,15 @@ document.getElementById('yearNow').textContent = new Date().getFullYear();
 const ADMIN_HASH = "e77f950c21650da8f4a9eb59d1a7cda9421058b0216b734460f76498821cc4a0";
 
 const CATEGORIES = [
-  { id: "repair",  name: "Xerox Machine Service & Repair", color: "#1f6fd6",
+  { id: "repair",  name: "Xerox Machine Service & Repair", color: "#1f6fd6", light: "#6ba3ef", dark: "#123f7a",
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.5 4.6L3 17.1V21h3.9l6.2-6.2a4 4 0 0 0 4.6-5.5l-2.8 2.8-2-2z"/></svg>' },
-  { id: "maintenance", name: "Printer Repair & Maintenance", color: "#1e8e3e",
+  { id: "maintenance", name: "Printer Repair & Maintenance", color: "#1e8e3e", light: "#5fc47f", dark: "#0f5c26",
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg>' },
-  { id: "sales", name: "Photocopier Sales & Service", color: "#7c4dbd",
+  { id: "sales", name: "Photocopier Sales & Service", color: "#7c4dbd", light: "#ab89dd", dark: "#4f2f80",
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="12" rx="1"/><path d="M8 21h8M9 17v4M15 17v4"/></svg>' },
-  { id: "parts", name: "Spare Parts & Accessories", color: "#f39c12",
+  { id: "parts", name: "Spare Parts & Accessories", color: "#f39c12", light: "#ffc45e", dark: "#a4650a",
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></svg>' },
-  { id: "machines", name: "New & Used Machines", color: "#e53935",
+  { id: "machines", name: "New & Used Machines", color: "#e53935", light: "#ff7d78", dark: "#941f1c",
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="18" cy="21" r="1.5"/><path d="M3 3h2l2.3 11.4a2 2 0 0 0 2 1.6h8.1a2 2 0 0 0 2-1.6L21 7H6"/></svg>' }
 ];
 
@@ -612,8 +697,11 @@ function categoryById(id){ return CATEGORIES.find(c => c.id === id); }
 function renderCategories(){
   const grid = document.getElementById('catGrid');
   grid.innerHTML = CATEGORIES.map(c => `
-    <div class="cat-card ${activeCategory===c.id ? 'active':''}" data-cat="${c.id}">
-      <div class="cat-icon" style="background:${c.color};">${c.icon}</div>
+    <div class="cat-card ${activeCategory===c.id ? 'active':''}" data-cat="${c.id}" style="border-top-color:${c.color};${activeCategory===c.id ? `box-shadow:0 0 0 2px ${c.color}40 inset;` : ''}">
+      <div class="cat-icon icon-3d" style="background:radial-gradient(circle at 32% 28%, ${c.light} 0%, ${c.color} 55%, ${c.dark} 100%);">
+        <span class="icon-glare"></span>
+        ${c.icon}
+      </div>
       <div class="cat-name">${c.name}</div>
     </div>
   `).join('');
@@ -631,7 +719,9 @@ function renderCategories(){
 // ---------- Render: products ----------
 function placeholderIcon(cat){
   const c = categoryById(cat) || CATEGORIES[0];
-  return `<div class="placeholder-icon" style="width:64px;height:64px;border-radius:14px;background:${c.color};display:flex;align-items:center;justify-content:center;">${c.icon}</div>`;
+  return `<div class="placeholder-icon icon-3d" style="width:68px;height:68px;border-radius:18px;background:radial-gradient(circle at 32% 28%, ${c.light} 0%, ${c.color} 55%, ${c.dark} 100%);display:flex;align-items:center;justify-content:center;position:relative;">
+    <span class="icon-glare" style="border-radius:18px;"></span>${c.icon}
+  </div>`;
 }
 
 function renderProducts(){
@@ -662,7 +752,7 @@ function renderProducts(){
           ${media}
         </div>
         <div class="prod-body">
-          <div class="prod-cat" style="color:${c.color};">${c.name}</div>
+          <div class="prod-cat" style="color:${c.color};background:${c.color}1a;">${c.name}</div>
           <div class="prod-name">${escapeHtml(p.name)}</div>
           <div class="prod-desc">${escapeHtml(p.desc || '')}</div>
           <div class="prod-price">&#8377; ${escapeHtml(p.price)}</div>
