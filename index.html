@@ -262,6 +262,12 @@ section{padding:64px 0;}
 .prod-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:26px;}
 .filter-note{color:var(--muted);font-size:0.88rem;}
 .filter-note button{background:none;border:none;color:var(--blue);cursor:pointer;font-weight:600;font-size:0.88rem;text-decoration:underline;padding:0;}
+.prod-search-wrap{position:relative;min-width:240px;}
+.prod-search-wrap input{
+  width:100%;padding:9px 14px 9px 34px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font-family:'Inter',sans-serif;font-size:0.88rem;
+}
+.prod-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:0.85rem;opacity:0.6;}
 .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;}
 .prod-card{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -280,8 +286,21 @@ section{padding:64px 0;}
 .prod-name{font-family:'Barlow',sans-serif;font-weight:700;font-size:1.05rem;}
 .prod-desc{color:var(--muted);font-size:0.86rem;flex:1;}
 .prod-price{font-family:'Barlow',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue-dark);}
+.prod-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.prod-price-original{font-size:0.85rem;color:var(--muted);text-decoration:line-through;}
 :root[data-theme="dark"] .prod-price{color:var(--sky);}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .prod-price{color:var(--sky);}}
+.featured-badge{
+  position:absolute;top:8px;right:8px;z-index:2;background:var(--amber);color:#3a2600;
+  font-size:0.66rem;font-weight:700;padding:3px 9px;border-radius:999px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.25);
+}
+.prod-thumbs{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:5px;z-index:2;}
+.prod-thumb-dot{
+  width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.4);cursor:pointer;padding:0;
+}
+.prod-thumb-dot.active{background:#fff;}
 .prod-actions{display:flex;gap:8px;margin-top:4px;}
 .prod-actions .btn{flex:1;padding:9px 10px;font-size:0.82rem;}
 .empty-state{
@@ -290,6 +309,37 @@ section{padding:64px 0;}
 
 /* Service area */
 .area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+.map-embed-wrap{margin-top:26px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 24px rgba(11,32,54,0.08);}
+.map-embed-wrap iframe{width:100%;height:320px;border:0;display:block;}
+.map-note{color:var(--muted);font-size:0.8rem;margin-top:10px;}
+
+/* Gallery */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.gallery-item{
+  position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:4/3;background:var(--bg);
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover;}
+.gallery-item .gallery-caption{
+  position:absolute;left:0;right:0;bottom:0;padding:8px 10px;
+  background:linear-gradient(0deg,rgba(11,32,54,0.75),transparent);
+  color:#fff;font-size:0.8rem;font-weight:600;
+}
+.gallery-item.placeholder{display:flex;align-items:center;justify-content:center;}
+
+/* FAQ */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-question{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:16px 4px;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:1.02rem;color:var(--ink);
+}
+.faq-question .plus{font-size:1.3rem;color:var(--blue);transition:transform .2s;flex-shrink:0;}
+.faq-item.open .faq-question .plus{transform:rotate(45deg);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.faq-item.open .faq-answer{max-height:220px;}
+.faq-answer p{color:var(--muted);font-size:0.9rem;padding:0 4px 16px;margin:0;}
 .area-card{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;
   border-top:3px solid var(--blue);
@@ -383,6 +433,15 @@ footer a:hover{color:#fff;}
 .form-grid .span2{grid-column:1/-1;}
 .upload-row{display:flex;align-items:center;gap:12px;}
 .upload-preview{width:52px;height:52px;border-radius:8px;object-fit:cover;background:var(--bg);border:1px solid var(--line);}
+.upload-preview-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
+.preview-thumb-wrap{position:relative;}
+.preview-remove-btn{
+  position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;
+  background:var(--red);color:#fff;border:none;font-size:0.75rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.checkbox-label{display:flex !important;align-items:center;gap:8px;font-weight:600 !important;cursor:pointer;}
+.checkbox-label input{width:auto !important;}
 .toast{
   position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
   background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:0.88rem;
@@ -391,6 +450,16 @@ footer a:hover{color:#fff;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-6px);}
 .hidden{display:none !important;}
 .scroll-x{overflow-x:auto;}
+.sync-badge{
+  position:fixed;bottom:14px;right:14px;z-index:60;
+  background:var(--ink);color:#fff;font-size:0.72rem;font-weight:600;
+  padding:6px 12px;border-radius:999px;opacity:0.85;
+  display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+.sync-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);}
+.sync-badge.online .dot{background:var(--green);}
+.sync-badge.offline .dot{background:var(--red);}
+@media (max-width:640px){.sync-badge{bottom:68px;}}
 
 /* Ratings */
 .ratings-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
@@ -463,10 +532,11 @@ footer a:hover{color:#fff;}
         <span class="district-chip c-orange">Murshidabad</span>
       </div>
       <h1>Your trusted partner for Xerox &amp; printing solutions</h1>
-      <p class="lede">Genuine parts, certified technicians and quick doorstep service for Xerox machines, printers and photocopiers &mdash; sales, repair, AMC and spares across North Bengal.</p>
+      <p class="lede">Genuine parts, certified technicians and quick doorstep service for Xerox machines, printers and photocopiers &mdash; sales, repair and spares across North Bengal.</p>
       <div class="cta-row">
         <a href="tel:+919733954374" class="btn btn-call" id="heroCallBtn">&#128222; Call to Book a Visit</a>
         <a href="https://wa.me/919733954374" target="_blank" rel="noopener" class="btn btn-outline-dark">WhatsApp Us</a>
+        <button class="btn btn-outline-dark" id="openCallbackBtn" type="button">&#9742; Request a Callback</button>
       </div>
     </div>
     <div class="hero-art">
@@ -495,7 +565,10 @@ footer a:hover{color:#fff;}
     </div>
     <div class="prod-toolbar">
       <div class="filter-note" id="filterNote">Showing all products</div>
-      <div style="font-size:0.85rem;color:var(--muted);">Tap a service icon above to filter</div>
+      <div class="prod-search-wrap">
+        <span class="prod-search-icon">&#128269;</span>
+        <input type="text" id="prodSearch" placeholder="Search products, e.g. toner, Xerox, copier...">
+      </div>
     </div>
     <div class="prod-grid" id="prodGrid"><!-- injected by JS --></div>
   </div>
@@ -526,6 +599,34 @@ footer a:hover{color:#fff;}
         <ul><li>Berhampore</li><li>Jangipur</li><li>Lalgola</li><li>Kandi</li><li>Domkal</li></ul>
       </div>
     </div>
+    <div class="map-embed-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=Malda%2C%20West%20Bengal&t=&z=9&ie=UTF8&iwloc=&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+    <p class="map-note">Map centred on Malda for reference — replace the map link with your exact shop address once you share it, and we'll pin it precisely.</p>
+  </div>
+</section>
+
+<section id="gallery" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker k-green">Our work</span>
+      <h2>Recent jobs &amp; machines we've handled</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"><!-- injected by JS --></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker k-purple">Good to know</span>
+      <h2>Frequently asked questions</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="faq-list" id="faqList"><!-- injected by JS --></div>
   </div>
 </section>
 
@@ -590,7 +691,7 @@ footer a:hover{color:#fff;}
   <div class="wrap">
     <div class="cta-band">
       <div>
-        <h2>Need a repair, AMC or a new machine?</h2>
+        <h2>Need a repair or a new machine?</h2>
         <p>Call us and we'll book a technician or quote you the same day.</p>
       </div>
       <div class="cta-row" style="margin:0;">
@@ -644,6 +745,33 @@ footer a:hover{color:#fff;}
   <a href="tel:+919733954374">&#128222; Call Now to Book</a>
 </div>
 
+<!-- Callback Request Modal -->
+<div class="modal-overlay" id="callbackOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="closeCallback">&times;</button>
+    <h3>Request a callback</h3>
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:-6px;">Leave your number and we'll call you back — this also opens WhatsApp with your details so we get it instantly.</p>
+    <div class="field">
+      <label for="cbName">Your name</label>
+      <input type="text" id="cbName" placeholder="e.g. Amit Sarkar">
+    </div>
+    <div class="field">
+      <label for="cbPhone">Phone number</label>
+      <input type="tel" id="cbPhone" placeholder="e.g. 98765 43210">
+    </div>
+    <div class="field">
+      <label for="cbTime">Preferred callback time (optional)</label>
+      <input type="text" id="cbTime" placeholder="e.g. Today evening, after 6pm">
+    </div>
+    <div class="field">
+      <label for="cbNote">What do you need help with? (optional)</label>
+      <textarea id="cbNote" placeholder="e.g. Xerox machine not printing"></textarea>
+    </div>
+    <div class="error-msg" id="callbackError">Please enter your name and a valid phone number.</div>
+    <button class="btn btn-blue" id="submitCallbackBtn" style="width:100%;">Send request</button>
+  </div>
+</div>
+
 <!-- Admin Login Modal -->
 <div class="modal-overlay" id="loginOverlay">
   <div class="modal-box">
@@ -683,11 +811,18 @@ footer a:hover{color:#fff;}
         <input type="text" id="pPrice" placeholder="e.g. 45000 or 2999/year">
       </div>
       <div class="field">
-        <label for="pImageFile">Photo (optional)</label>
+        <label for="pOriginalPrice">Original price (optional — shows a strike-through discount)</label>
+        <input type="text" id="pOriginalPrice" placeholder="e.g. 52000">
+      </div>
+      <div class="field span2">
+        <label class="checkbox-label"><input type="checkbox" id="pFeatured"> Mark as Featured (shows first with a star badge)</label>
+      </div>
+      <div class="field span2">
+        <label for="pImageFile">Photos (optional — select multiple)</label>
         <div class="upload-row">
-          <img id="pImagePreview" class="upload-preview" src="" alt="" style="display:none;">
-          <input type="file" id="pImageFile" accept="image/*">
+          <input type="file" id="pImageFile" accept="image/*" multiple>
         </div>
+        <div class="upload-preview-row" id="pImagePreviewRow"></div>
       </div>
       <div class="field span2">
         <label for="pDesc">Short description</label>
@@ -719,10 +854,50 @@ footer a:hover{color:#fff;}
         <tbody id="adminRatingsBody"></tbody>
       </table>
     </div>
+
+    <h4 class="admin-section-title">Callback requests</h4>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:-8px;">Submitting a callback request also opens WhatsApp with the details pre-filled, so you get it instantly — this table is a backup log on this device.</p>
+    <div class="scroll-x">
+      <table class="admin-table" id="adminCallbackTable">
+        <thead>
+          <tr><th>Name</th><th>Phone</th><th>Preferred time</th><th>Note</th><th>Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="adminCallbackBody"></tbody>
+      </table>
+    </div>
+
+    <h4 class="admin-section-title">Gallery photos</h4>
+    <div class="form-grid">
+      <div class="field span2">
+        <label for="gCaption">Caption</label>
+        <input type="text" id="gCaption" placeholder="e.g. Copier repaired at English Bazar shop">
+      </div>
+      <div class="field span2">
+        <label for="gImageFile">Photo</label>
+        <input type="file" id="gImageFile" accept="image/*">
+        <div class="upload-preview-row" id="gImagePreviewRow"></div>
+      </div>
+    </div>
+    <div id="galleryFormError" class="error-msg">Please choose a photo before adding it to the gallery.</div>
+    <button class="btn btn-blue" id="addGalleryBtn">Add photo</button>
+
+    <div class="scroll-x" style="margin-top:16px;">
+      <table class="admin-table" id="adminGalleryTable">
+        <thead>
+          <tr><th></th><th>Caption</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="adminGalleryBody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="sync-badge" id="syncBadge">Connecting…</div>
+
+<!-- Firebase (Realtime Database) SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 
 <script>
@@ -748,37 +923,117 @@ const CATEGORIES = [
 ];
 
 const DEFAULT_PRODUCTS = [
-  { id: "p1", name: "Xerox 7845 Multifunction Copier (Refurbished)", category: "machines", price: "45,000", desc: "A3 colour copier, fully serviced and tested with 6-month warranty.", image: "" },
-  { id: "p2", name: "Ricoh MP 2014 B/W Copier (Used)", category: "machines", price: "28,000", desc: "Reliable workhorse copier, great for small offices and shops.", image: "" },
-  { id: "p3", name: "Xerox VersaLink C405 Colour Printer (New)", category: "sales", price: "1,10,000", desc: "New sealed-box colour multifunction printer with full manufacturer warranty.", image: "" },
-  { id: "p4", name: "HP LaserJet Pro M126nw Printer (New)", category: "sales", price: "14,500", desc: "Compact wireless printer, ideal for home offices.", image: "" },
-  { id: "p5", name: "Toner Cartridge – Xerox 3020/3025 (Compatible)", category: "parts", price: "850", desc: "High-yield compatible toner, tested for consistent print quality.", image: "" },
-  { id: "p6", name: "Drum Unit – Canon NPG-59", category: "parts", price: "1,200", desc: "Genuine-spec drum unit for Canon copiers.", image: "" },
-  { id: "p7", name: "Printer AMC – Basic Plan (1 Year)", category: "maintenance", price: "2,999 / year", desc: "Scheduled servicing, priority callouts and discounted spares for a year.", image: "" },
-  { id: "p8", name: "On-site Copier Repair Visit", category: "repair", price: "499 (visit charge)", desc: "A technician visits your shop or office to diagnose and fix the issue.", image: "" }
+  { id: "p1", name: "Xerox 7845 Multifunction Copier (Refurbished)", category: "machines", price: "45,000", originalPrice: "52,000", featured: true, desc: "A3 colour copier, fully serviced and tested with 6-month warranty.", images: [] },
+  { id: "p2", name: "Ricoh MP 2014 B/W Copier (Used)", category: "machines", price: "28,000", originalPrice: "", featured: false, desc: "Reliable workhorse copier, great for small offices and shops.", images: [] },
+  { id: "p3", name: "Xerox VersaLink C405 Colour Printer (New)", category: "sales", price: "1,10,000", originalPrice: "", featured: true, desc: "New sealed-box colour multifunction printer with full manufacturer warranty.", images: [] },
+  { id: "p4", name: "HP LaserJet Pro M126nw Printer (New)", category: "sales", price: "14,500", originalPrice: "16,999", featured: false, desc: "Compact wireless printer, ideal for home offices.", images: [] },
+  { id: "p5", name: "Toner Cartridge – Xerox 3020/3025 (Compatible)", category: "parts", price: "850", originalPrice: "", featured: false, desc: "High-yield compatible toner, tested for consistent print quality.", images: [] },
+  { id: "p6", name: "Drum Unit – Canon NPG-59", category: "parts", price: "1,200", originalPrice: "", featured: false, desc: "Genuine-spec drum unit for Canon copiers.", images: [] },
+  { id: "p7", name: "Fuser Unit – HP LaserJet Series", category: "parts", price: "1,650", originalPrice: "", featured: false, desc: "OEM-spec fuser unit for consistent, smudge-free printing.", images: [] },
+  { id: "p8", name: "On-site Copier Repair Visit", category: "repair", price: "499 (visit charge)", originalPrice: "", featured: false, desc: "A technician visits your shop or office to diagnose and fix the issue.", images: [] }
 ];
 
 const PHONE_TEL = "+919733954374";
 const PHONE_DISPLAY = "+91 97339 54374";
 const WHATSAPP_NUMBER = "919733954374";
 
-// ---------- Storage helpers ----------
-function loadProducts(){
-  try{
-    const raw = localStorage.getItem('dc_products');
-    if(raw) return JSON.parse(raw);
-  }catch(e){ console.warn('Could not read saved products, using defaults.'); }
-  localStorage.setItem('dc_products', JSON.stringify(DEFAULT_PRODUCTS));
-  return DEFAULT_PRODUCTS.slice();
-}
-function saveProducts(list){
-  try{ localStorage.setItem('dc_products', JSON.stringify(list)); }
-  catch(e){ showToast('Could not save — storage may be full.'); }
+// ---------- Firebase (Realtime Database) ----------
+// NOTE: Firebase web config values are not secret — they only identify which
+// project to talk to. Real protection comes from the Realtime Database
+// Security Rules set in the Firebase console, not from hiding this object.
+const firebaseConfig = {
+  apiKey: "AIzaSyBybPZkGQX27j3s2hdH-ZlSP6CEA_EoD9Q",
+  authDomain: "digital-copier.firebaseapp.com",
+  projectId: "digital-copier",
+  storageBucket: "digital-copier.firebasestorage.app",
+  messagingSenderId: "1032580040606",
+  appId: "1:1032580040606:web:20d4f46b14a6359d2f388f",
+  measurementId: "G-0932R67Z9S",
+  databaseURL: "https://digital-copier-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+firebase.initializeApp(firebaseConfig);
+const rtdb = firebase.database();
+
+(function watchConnection(){
+  const badge = document.getElementById('syncBadge');
+  rtdb.ref('.info/connected').on('value', (snap) => {
+    if(snap.val() === true){
+      badge.textContent = 'Live — synced';
+      badge.className = 'sync-badge online';
+    } else {
+      badge.textContent = 'Offline — reconnecting…';
+      badge.className = 'sync-badge offline';
+    }
+  });
+})();
+
+// Downscale a chosen photo before storing it, so the shared database stays
+// small and fast for every visitor (Realtime Database syncs full payloads).
+function resizeImageFile(file, maxDim, quality){
+  maxDim = maxDim || 1000;
+  quality = quality || 0.75;
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let { width, height } = img;
+        if(width > maxDim || height > maxDim){
+          if(width > height){ height = Math.round(height * (maxDim/width)); width = maxDim; }
+          else { width = Math.round(width * (maxDim/height)); height = maxDim; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
-let products = loadProducts();
+// ---------- Products (synced live via Firebase) ----------
+function migrateProduct(id, p){
+  p = Object.assign({}, p);
+  p.id = id;
+  if(!p.images) p.images = p.image ? [p.image] : [];
+  if(typeof p.featured !== 'boolean') p.featured = false;
+  if(typeof p.originalPrice !== 'string') p.originalPrice = '';
+  delete p.image;
+  return p;
+}
+
+let products = [];
 let activeCategory = null;
 let editingId = null;
+let searchQuery = "";
+let activeImageIndex = {}; // productId -> current gallery index shown on the card
+
+const productsRef = rtdb.ref('products');
+
+// Seed the shared database once, only if it's completely empty (first-ever run).
+productsRef.once('value').then((snap) => {
+  if(!snap.exists()){
+    const seed = {};
+    DEFAULT_PRODUCTS.forEach(p => {
+      const { id, ...rest } = p;
+      seed[id] = rest;
+    });
+    productsRef.set(seed);
+  }
+});
+
+// Live listener: fires immediately with current data, then again on every
+// change from any device — this is what makes the catalogue real-time.
+productsRef.on('value', (snap) => {
+  const val = snap.val() || {};
+  products = Object.keys(val).map(id => migrateProduct(id, val[id]));
+  renderProducts();
+  if(isAdmin()) renderAdminTable();
+});
 
 function categoryById(id){ return CATEGORIES.find(c => c.id === id); }
 
@@ -816,35 +1071,67 @@ function placeholderIcon(cat){
 function renderProducts(){
   const grid = document.getElementById('prodGrid');
   const note = document.getElementById('filterNote');
-  let list = products;
+  let list = products.slice();
+
   if(activeCategory){
-    list = products.filter(p => p.category === activeCategory);
+    list = list.filter(p => p.category === activeCategory);
+  }
+  if(searchQuery.trim()){
+    const q = searchQuery.trim().toLowerCase();
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.desc || '').toLowerCase().includes(q) ||
+      (categoryById(p.category)?.name || '').toLowerCase().includes(q)
+    );
+  }
+  // Featured items first, keep relative order otherwise
+  list.sort((a, b) => (b.featured === true) - (a.featured === true));
+
+  const parts = [];
+  if(activeCategory){
     const c = categoryById(activeCategory);
-    note.innerHTML = `Showing: <strong>${c ? c.name : ''}</strong> &nbsp;·&nbsp; <button id="clearFilterBtn">Clear filter</button>`;
+    parts.push(`Category: <strong>${c ? c.name : ''}</strong>`);
+  }
+  if(searchQuery.trim()){
+    parts.push(`Search: <strong>"${escapeHtml(searchQuery.trim())}"</strong>`);
+  }
+  if(parts.length){
+    note.innerHTML = parts.join(' &nbsp;·&nbsp; ') + ` &nbsp;·&nbsp; <button id="clearFilterBtn">Clear filters</button>`;
   } else {
     note.textContent = `Showing all ${products.length} products`;
   }
 
   if(list.length === 0){
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">No products in this category yet. Call us — we likely still stock or can source it.</div>`;
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">No matching products. Call us — we likely still stock or can source it.</div>`;
   } else {
     grid.innerHTML = list.map(p => {
       const c = categoryById(p.category) || CATEGORIES[0];
-      const media = p.image
-        ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">`
+      const imgs = (p.images && p.images.length) ? p.images : [];
+      const curIdx = activeImageIndex[p.id] || 0;
+      const media = imgs.length
+        ? `<img src="${imgs[Math.min(curIdx, imgs.length-1)]}" alt="${escapeHtml(p.name)}">`
         : placeholderIcon(p.category);
+      const thumbs = imgs.length > 1
+        ? `<div class="prod-thumbs">${imgs.map((img, i) => `<button class="prod-thumb-dot ${i===curIdx?'active':''}" data-pid="${p.id}" data-idx="${i}"></button>`).join('')}</div>`
+        : '';
+      const priceHtml = p.originalPrice
+        ? `<span class="prod-price-original">&#8377; ${escapeHtml(p.originalPrice)}</span> <span class="prod-price">&#8377; ${escapeHtml(p.price)}</span>`
+        : `<span class="prod-price">&#8377; ${escapeHtml(p.price)}</span>`;
+      const featuredBadge = p.featured ? `<div class="featured-badge">&#9733; Featured</div>` : '';
       const waText = encodeURIComponent(`Hi, I'm interested in "${p.name}" listed on your Digital Copier website. Please share more details.`);
       return `
       <div class="prod-card">
         <div class="prod-media">
           <div class="cat-strip" style="background:${c.color};"></div>
+          ${featuredBadge}
           ${media}
+          ${thumbs}
         </div>
         <div class="prod-body">
           <div class="prod-cat" style="color:${c.color};background:${c.color}1a;">${c.name}</div>
           <div class="prod-name">${escapeHtml(p.name)}</div>
           <div class="prod-desc">${escapeHtml(p.desc || '')}</div>
-          <div class="prod-price">&#8377; ${escapeHtml(p.price)}</div>
+          <div class="prod-price-row">${priceHtml}</div>
           <div class="prod-actions">
             <a class="btn btn-call" href="tel:${PHONE_TEL}">&#128222; Book via Call</a>
             <a class="btn btn-ghost" href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" target="_blank" rel="noopener">WhatsApp</a>
@@ -858,10 +1145,19 @@ function renderProducts(){
   if(clearBtn){
     clearBtn.addEventListener('click', () => {
       activeCategory = null;
+      searchQuery = "";
+      document.getElementById('prodSearch').value = "";
       renderCategories();
       renderProducts();
     });
   }
+  grid.querySelectorAll('.prod-thumb-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const pid = dot.getAttribute('data-pid');
+      activeImageIndex[pid] = parseInt(dot.getAttribute('data-idx'), 10);
+      renderProducts();
+    });
+  });
 }
 
 function escapeHtml(str){
@@ -939,6 +1235,10 @@ function openAdminDashboard(){
   resetProductForm();
   renderAdminTable();
   renderAdminRatingsTable();
+  renderAdminCallbackTable();
+  renderAdminGalleryTable();
+  renderImagePreviewRow();
+  renderGalleryPreviewRow();
   adminOverlay.classList.add('open');
 }
 
@@ -950,13 +1250,18 @@ function renderAdminTable(){
   }
   body.innerHTML = products.map(p => {
     const c = categoryById(p.category) || CATEGORIES[0];
-    const thumb = p.image ? `<img class="admin-thumb" src="${p.image}">` : `<div class="admin-thumb" style="background:${c.color};"></div>`;
+    const firstImg = (p.images && p.images[0]) || "";
+    const thumb = firstImg ? `<img class="admin-thumb" src="${firstImg}">` : `<div class="admin-thumb" style="background:${c.color};"></div>`;
+    const priceCell = p.originalPrice
+      ? `<span style="text-decoration:line-through;color:var(--muted);">&#8377;${escapeHtml(p.originalPrice)}</span> &#8377;${escapeHtml(p.price)}`
+      : `&#8377; ${escapeHtml(p.price)}`;
+    const featuredTag = p.featured ? ` <span style="color:var(--amber);">&#9733;</span>` : '';
     return `
     <tr data-id="${p.id}">
       <td>${thumb}</td>
-      <td>${escapeHtml(p.name)}</td>
+      <td>${escapeHtml(p.name)}${featuredTag}</td>
       <td>${c.name}</td>
-      <td>&#8377; ${escapeHtml(p.price)}</td>
+      <td>${priceCell}</td>
       <td class="actions">
         <button class="btn btn-ghost btn-sm edit-btn">Edit</button>
         <button class="btn btn-danger btn-sm delete-btn">Delete</button>
@@ -973,41 +1278,56 @@ function renderAdminTable(){
   body.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const id = e.target.closest('tr').getAttribute('data-id');
-      if(confirm('Delete this product? This cannot be undone.')){
-        products = products.filter(p => p.id !== id);
-        saveProducts(products);
-        renderAdminTable();
-        renderProducts();
-        showToast('Product deleted');
+      if(confirm('Delete this product? This will remove it for every visitor.')){
+        productsRef.child(id).remove()
+          .then(() => showToast('Product deleted'))
+          .catch(() => showToast('Could not delete — check your connection.'));
       }
     });
   });
 }
 
-let pendingImageData = "";
+let pendingImages = [];
+
+function renderImagePreviewRow(){
+  const row = document.getElementById('pImagePreviewRow');
+  row.innerHTML = pendingImages.map((img, i) => `
+    <div class="preview-thumb-wrap">
+      <img class="upload-preview" src="${img}">
+      <button type="button" class="preview-remove-btn" data-idx="${i}" title="Remove photo">&times;</button>
+    </div>
+  `).join('');
+  row.querySelectorAll('.preview-remove-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pendingImages.splice(parseInt(btn.getAttribute('data-idx'), 10), 1);
+      renderImagePreviewRow();
+    });
+  });
+}
 
 document.getElementById('pImageFile').addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingImageData = reader.result;
-    const preview = document.getElementById('pImagePreview');
-    preview.src = pendingImageData;
-    preview.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+  const files = Array.from(e.target.files || []);
+  if(!files.length) return;
+  files.forEach(file => {
+    resizeImageFile(file, 1000, 0.75).then(dataUrl => {
+      pendingImages.push(dataUrl);
+      renderImagePreviewRow();
+    });
+  });
+  e.target.value = '';
 });
 
 function resetProductForm(){
   editingId = null;
-  pendingImageData = "";
+  pendingImages = [];
   document.getElementById('pName').value = '';
   document.getElementById('pCategory').value = CATEGORIES[0].id;
   document.getElementById('pPrice').value = '';
+  document.getElementById('pOriginalPrice').value = '';
+  document.getElementById('pFeatured').checked = false;
   document.getElementById('pDesc').value = '';
   document.getElementById('pImageFile').value = '';
-  document.getElementById('pImagePreview').style.display = 'none';
+  renderImagePreviewRow();
   document.getElementById('adminFormError').classList.remove('show');
   document.getElementById('saveProductBtn').textContent = 'Add product';
   document.getElementById('cancelEditBtn').classList.add('hidden');
@@ -1017,14 +1337,14 @@ function startEdit(id){
   const p = products.find(p => p.id === id);
   if(!p) return;
   editingId = id;
-  pendingImageData = p.image || "";
+  pendingImages = (p.images || []).slice();
   document.getElementById('pName').value = p.name;
   document.getElementById('pCategory').value = p.category;
   document.getElementById('pPrice').value = p.price;
+  document.getElementById('pOriginalPrice').value = p.originalPrice || '';
+  document.getElementById('pFeatured').checked = !!p.featured;
   document.getElementById('pDesc').value = p.desc || '';
-  const preview = document.getElementById('pImagePreview');
-  if(p.image){ preview.src = p.image; preview.style.display = 'block'; }
-  else { preview.style.display = 'none'; }
+  renderImagePreviewRow();
   document.getElementById('saveProductBtn').textContent = 'Save changes';
   document.getElementById('cancelEditBtn').classList.remove('hidden');
   document.getElementById('pName').scrollIntoView({behavior:'smooth', block:'center'});
@@ -1036,6 +1356,8 @@ document.getElementById('saveProductBtn').addEventListener('click', () => {
   const name = document.getElementById('pName').value.trim();
   const category = document.getElementById('pCategory').value;
   const price = document.getElementById('pPrice').value.trim();
+  const originalPrice = document.getElementById('pOriginalPrice').value.trim();
+  const featured = document.getElementById('pFeatured').checked;
   const desc = document.getElementById('pDesc').value.trim();
   const errBox = document.getElementById('adminFormError');
 
@@ -1045,43 +1367,42 @@ document.getElementById('saveProductBtn').addEventListener('click', () => {
   }
   errBox.classList.remove('show');
 
-  if(editingId){
-    const p = products.find(p => p.id === editingId);
-    p.name = name; p.category = category; p.price = price; p.desc = desc;
-    p.image = pendingImageData || p.image || "";
-    showToast('Product updated');
-  } else {
-    products.push({
-      id: 'p_' + Date.now(),
-      name, category, price, desc,
-      image: pendingImageData || ""
-    });
-    showToast('Product added');
-  }
-  saveProducts(products);
-  renderAdminTable();
-  renderProducts();
-  resetProductForm();
+  const record = { name, category, price, desc, originalPrice, featured, images: pendingImages.slice() };
+  const saveBtn = document.getElementById('saveProductBtn');
+  saveBtn.disabled = true;
+
+  const writeOp = editingId
+    ? productsRef.child(editingId).set(record)
+    : productsRef.push(record);
+
+  writeOp
+    .then(() => {
+      showToast(editingId ? 'Product updated' : 'Product added — live for every visitor');
+      resetProductForm();
+    })
+    .catch(() => showToast('Could not save — check your connection.'))
+    .finally(() => { saveBtn.disabled = false; });
 });
 
 // ---------- Init ----------
+document.getElementById('prodSearch').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  renderProducts();
+});
 renderCategories();
 renderProducts();
 
-// ---------- Ratings ----------
-function loadRatings(){
-  try{
-    const raw = localStorage.getItem('dc_ratings');
-    if(raw) return JSON.parse(raw);
-  }catch(e){ console.warn('Could not read saved ratings.'); }
-  return [];
-}
-function saveRatings(list){
-  try{ localStorage.setItem('dc_ratings', JSON.stringify(list)); }
-  catch(e){ showToast('Could not save rating — storage may be full.'); }
-}
+// ---------- Ratings (synced live via Firebase) ----------
+const ratingsRef = rtdb.ref('ratings');
+let ratings = [];
 
-let ratings = loadRatings();
+ratingsRef.on('value', (snap) => {
+  const val = snap.val() || {};
+  ratings = Object.keys(val).map(id => Object.assign({ id }, val[id]));
+  renderRatingSummary();
+  if(isAdmin()) renderAdminRatingsTable();
+});
+
 let selectedStars = 0;
 
 function renderStarPicker(){
@@ -1148,14 +1469,11 @@ document.getElementById('submitRatingBtn').addEventListener('click', () => {
   const name = document.getElementById('rName').value.trim();
   const comment = document.getElementById('rComment').value.trim();
 
-  ratings.push({
-    id: 'r_' + Date.now(),
+  ratingsRef.push({
     name, comment,
     stars: selectedStars,
     date: Date.now()
-  });
-  saveRatings(ratings);
-  renderRatingSummary();
+  }).catch(() => showToast('Could not submit — check your connection.'));
 
   // Auto-generated thank-you message shown to the customer
   thanks.classList.add('show');
@@ -1190,11 +1508,9 @@ function renderAdminRatingsTable(){
     btn.addEventListener('click', (e) => {
       const id = e.target.closest('tr').getAttribute('data-id');
       if(confirm('Delete this rating? This cannot be undone.')){
-        ratings = ratings.filter(r => r.id !== id);
-        saveRatings(ratings);
-        renderAdminRatingsTable();
-        renderRatingSummary();
-        showToast('Rating deleted');
+        ratingsRef.child(id).remove()
+          .then(() => showToast('Rating deleted'))
+          .catch(() => showToast('Could not delete — check your connection.'));
       }
     });
   });
@@ -1202,6 +1518,203 @@ function renderAdminRatingsTable(){
 
 renderStarPicker();
 renderRatingSummary();
+
+// ---------- Callback requests (synced live via Firebase) ----------
+const callbacksRef = rtdb.ref('callbacks');
+let callbacks = [];
+
+callbacksRef.on('value', (snap) => {
+  const val = snap.val() || {};
+  callbacks = Object.keys(val).map(id => Object.assign({ id }, val[id]));
+  if(isAdmin()) renderAdminCallbackTable();
+});
+
+const callbackOverlay = document.getElementById('callbackOverlay');
+document.getElementById('openCallbackBtn').addEventListener('click', () => callbackOverlay.classList.add('open'));
+document.getElementById('closeCallback').addEventListener('click', () => callbackOverlay.classList.remove('open'));
+callbackOverlay.addEventListener('click', (e) => { if(e.target === callbackOverlay) callbackOverlay.classList.remove('open'); });
+
+document.getElementById('submitCallbackBtn').addEventListener('click', () => {
+  const name = document.getElementById('cbName').value.trim();
+  const phone = document.getElementById('cbPhone').value.trim();
+  const time = document.getElementById('cbTime').value.trim();
+  const note = document.getElementById('cbNote').value.trim();
+  const err = document.getElementById('callbackError');
+
+  const phoneDigits = phone.replace(/\D/g,'');
+  if(!name || phoneDigits.length < 10){
+    err.classList.add('show');
+    return;
+  }
+  err.classList.remove('show');
+
+  callbacksRef.push({ name, phone, time, note, date: Date.now() })
+    .catch(() => showToast('Could not log request, but sending via WhatsApp anyway.'));
+
+  // Real-time delivery: open WhatsApp with the request pre-filled so the
+  // owner receives it instantly, regardless of which device they're on.
+  const waMsg = encodeURIComponent(
+    `New callback request from the website:\nName: ${name}\nPhone: ${phone}` +
+    (time ? `\nPreferred time: ${time}` : '') +
+    (note ? `\nNote: ${note}` : '')
+  );
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`, '_blank');
+
+  showToast("Thanks! We'll call you back soon.");
+  callbackOverlay.classList.remove('open');
+  document.getElementById('cbName').value = '';
+  document.getElementById('cbPhone').value = '';
+  document.getElementById('cbTime').value = '';
+  document.getElementById('cbNote').value = '';
+});
+
+function renderAdminCallbackTable(){
+  const body = document.getElementById('adminCallbackBody');
+  if(!body) return;
+  if(callbacks.length === 0){
+    body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px;">No callback requests logged on this device yet.</td></tr>`;
+    return;
+  }
+  const sorted = callbacks.slice().sort((a,b) => b.date - a.date);
+  body.innerHTML = sorted.map(r => `
+    <tr data-id="${r.id}">
+      <td>${escapeHtml(r.name)}</td>
+      <td><a href="tel:${escapeHtml(r.phone.replace(/\s/g,''))}">${escapeHtml(r.phone)}</a></td>
+      <td>${escapeHtml(r.time || '—')}</td>
+      <td style="max-width:220px;">${escapeHtml(r.note || '—')}</td>
+      <td style="white-space:nowrap;">${new Date(r.date).toLocaleDateString('en-IN')}</td>
+      <td class="actions"><button class="btn btn-danger btn-sm delete-callback-btn">Delete</button></td>
+    </tr>
+  `).join('');
+  body.querySelectorAll('.delete-callback-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.closest('tr').getAttribute('data-id');
+      if(confirm('Delete this callback request?')){
+        callbacksRef.child(id).remove()
+          .then(() => showToast('Callback request deleted'))
+          .catch(() => showToast('Could not delete — check your connection.'));
+      }
+    });
+  });
+}
+
+// ---------- Gallery (synced live via Firebase) ----------
+const galleryRef = rtdb.ref('gallery');
+let gallery = [];
+
+galleryRef.on('value', (snap) => {
+  const val = snap.val() || {};
+  gallery = Object.keys(val).map(id => Object.assign({ id }, val[id]));
+  renderGallery();
+  if(isAdmin()) renderAdminGalleryTable();
+});
+
+function renderGallery(){
+  const grid = document.getElementById('galleryGrid');
+  if(gallery.length === 0){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">Photos of completed jobs will appear here soon — add some from the admin panel.</div>`;
+    return;
+  }
+  grid.innerHTML = gallery.map(g => `
+    <div class="gallery-item">
+      <img src="${g.image}" alt="${escapeHtml(g.caption || 'Digital Copier work')}">
+      ${g.caption ? `<div class="gallery-caption">${escapeHtml(g.caption)}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+let pendingGalleryImage = "";
+function renderGalleryPreviewRow(){
+  const row = document.getElementById('gImagePreviewRow');
+  if(!row) return;
+  row.innerHTML = pendingGalleryImage
+    ? `<div class="preview-thumb-wrap"><img class="upload-preview" src="${pendingGalleryImage}"><button type="button" class="preview-remove-btn" id="removeGalleryPreview" title="Remove">&times;</button></div>`
+    : '';
+  const rm = document.getElementById('removeGalleryPreview');
+  if(rm) rm.addEventListener('click', () => { pendingGalleryImage = ""; renderGalleryPreviewRow(); });
+}
+document.getElementById('gImageFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  resizeImageFile(file, 1200, 0.75).then(dataUrl => {
+    pendingGalleryImage = dataUrl;
+    renderGalleryPreviewRow();
+  });
+  e.target.value = '';
+});
+document.getElementById('addGalleryBtn').addEventListener('click', () => {
+  const caption = document.getElementById('gCaption').value.trim();
+  const err = document.getElementById('galleryFormError');
+  if(!pendingGalleryImage){
+    err.classList.add('show');
+    return;
+  }
+  err.classList.remove('show');
+  galleryRef.push({ caption, image: pendingGalleryImage })
+    .then(() => showToast('Photo added — live for every visitor'))
+    .catch(() => showToast('Could not upload — check your connection.'));
+  document.getElementById('gCaption').value = '';
+  document.getElementById('gImageFile').value = '';
+  pendingGalleryImage = "";
+  renderGalleryPreviewRow();
+});
+
+function renderAdminGalleryTable(){
+  const body = document.getElementById('adminGalleryBody');
+  if(!body) return;
+  if(gallery.length === 0){
+    body.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:20px;">No gallery photos yet.</td></tr>`;
+    return;
+  }
+  body.innerHTML = gallery.map(g => `
+    <tr data-id="${g.id}">
+      <td><img class="admin-thumb" src="${g.image}"></td>
+      <td>${escapeHtml(g.caption || '—')}</td>
+      <td class="actions"><button class="btn btn-danger btn-sm delete-gallery-btn">Delete</button></td>
+    </tr>
+  `).join('');
+  body.querySelectorAll('.delete-gallery-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.closest('tr').getAttribute('data-id');
+      if(confirm('Delete this gallery photo?')){
+        galleryRef.child(id).remove()
+          .then(() => showToast('Photo removed'))
+          .catch(() => showToast('Could not delete — check your connection.'));
+      }
+    });
+  });
+}
+
+
+// ---------- FAQ ----------
+const FAQ_ITEMS = [
+  { q: "Which areas do you cover?", a: "We provide doorstep service across Malda, Uttar Dinajpur, Dakshin Dinajpur and Murshidabad districts, including Raiganj, Balurghat, Berhampore and surrounding towns." },
+  { q: "Do you repair all printer and copier brands?", a: "Yes — we service Xerox, Ricoh, Canon, HP, Konica Minolta and most other major brands, along with genuine and compatible spare parts." },
+  { q: "How fast can a technician reach my shop or office?", a: "Typical response time is 24–48 hours depending on your location. Call or WhatsApp us and we'll confirm the earliest available slot." },
+  { q: "Do used or refurbished machines come with a warranty?", a: "Yes, refurbished machines we sell are tested before delivery and come with a warranty period — details are shared at the time of purchase." },
+  { q: "Can I get a price quote before booking a repair?", a: "Absolutely — call, WhatsApp us, or use the Request a Callback button and we'll quote you the same day." },
+  { q: "Do you offer genuine spare parts?", a: "We stock genuine and high-quality compatible spares — toner, drum units, fuser units and more — for most major printer and copier brands." }
+];
+
+function renderFAQ(){
+  const list = document.getElementById('faqList');
+  list.innerHTML = FAQ_ITEMS.map((f, i) => `
+    <div class="faq-item" data-idx="${i}">
+      <button class="faq-question" type="button">
+        <span>${escapeHtml(f.q)}</span>
+        <span class="plus">+</span>
+      </button>
+      <div class="faq-answer"><p>${escapeHtml(f.a)}</p></div>
+    </div>
+  `).join('');
+  list.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.faq-item').classList.toggle('open');
+    });
+  });
+}
+renderFAQ();
+
 
 </script>
 </body>
